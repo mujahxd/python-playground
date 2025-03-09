@@ -22,7 +22,7 @@ def login():
     password = getpass.getpass("Enter password: ")
     
     if username in data and data[username]["password"] == password:
-        print(f"Welcome, {username}!")
+        print(f"\nWelcome, {username}!")
         user_menu(username)
     else:
         print("Incorrect username or password!")
