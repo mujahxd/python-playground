@@ -19,13 +19,14 @@ def main():
             user = login()
         elif choice == "2":
             register()
+            continue
         elif choice == "3":
             user = "guest"
         elif choice == "4":
-            print("Thank you for using the Recipe Book. See you next time!")
+            print("Thank you for using the Recipe Book. See you next time!\n")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.\n")
             continue
 
         if user:
@@ -33,7 +34,7 @@ def main():
 
 def recipe_menu(user):
     while True:
-        print("\nRecipe Management")
+        print("Recipe Management")
         print("1. View Recipes")
         if user != "guest":
             print("2. Add Recipe")
@@ -55,7 +56,7 @@ def recipe_menu(user):
             print("Logging out...")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("Invalid choice. Please try again.\n")
 
 if __name__ == "__main__":
     main()
