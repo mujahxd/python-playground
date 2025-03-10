@@ -28,6 +28,9 @@ def main():
             print("Invalid choice. Please try again.")
             continue
 
+        if user:
+            recipe_menu(user)
+
 def recipe_menu(user):
     while True:
         print("\nRecipe Management")
