@@ -1,12 +1,73 @@
 # recipes.py (Recipe Management)
-def add_recipe():
-    pass  # Function to add a recipe
+from storage import load_data, save_data
+
+def add_recipe(username):
+    """Add a new recipe."""
+    recipes = load_data("recipes.json")
+
+    title = input("Enter recipe title: ")
+    ingredients = input("Enter ingridients (comma-separated): ").split(",")
+    steps = []
+
+    print("Enter cooking steps (type 'done' to finish)")
+    while True:
+        step = input(f"Step {len(steps)+1}: ")
+        if step.lower() == "done":
+            break
+        steps.append(step)
+
+    recipe = {
+        "title": title,
+        "ingredients": [ingredient.strip() for ingredient in ingredients],
+        "steps": steps,
+        "author": username
+    }
+
+    recipes.append(recipe)
+    save_data("recipes.json", recipes)
+    print("Recipe added successfully!")
+
 
 def view_recipes():
-    pass  # Function to view recipe list
+    """View all recipes."""
+    recipes = load_data("recipes.json")
 
-def delete_recipe():
-    pass  # Function to delete a specific recipe
+    if not recipes:
+        print("No recipes available.")
+        return
+    
+    for index, recipe in enumerate(recipes, start=1):
+        print(f"\nRecipe {index}: {recipe['title']}")
+        print("Ingredients:", ", ".join(recipe['ingredients']))
+        print("Steps:")
+        for step_num, step in enumerate(recipe['steps'], start=1):
+            print(f"  {step_num}. {step}")
+        print("Author:", recipe['author'])
 
-def delete_all_recipes():
-    pass  # Function to delete all recipes by a user
+def delete_recipe(username):
+    """Delete a recipe created by the logged-in user."""
+    recipes = load_data("recipes.json")
+
+    user_recipes = [r for r in recipes if r["author"] == username]
+    if not user_recipes:
+        print("You have no recipes to delete.")
+        return
+    
+    for index, recipe in enumerate(user_recipes, start=1):
+        print(f"{index}. {recipe['title']}")
+
+    choice = int(input("Enter the number of the recipe to delete: "))
+    if 1 <= choice <= len(user_recipes):
+        recipes.remove(user_recipes[choice - 1])
+        save_data("recipes.json", recipes)
+        print("Recipe deleted successfully!")
+    else:
+        print("Invalid selection.")
+
+def delete_all_recipes(username):
+    """Delete all recipes created by the logged-in user."""
+    recipes = load_data("recipes.json")
+    
+    recipes = [r for r in recipes if r["author"] != username]
+    save_data("recipes.json", recipes)
+    print("All your recipes have been deleted.")
