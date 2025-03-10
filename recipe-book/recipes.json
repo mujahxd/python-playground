@@ -1,0 +1,50 @@
+{
+    "admin": [
+        {
+            "title": "nasi goreng",
+            "ingredients": [
+                "nasi",
+                "goreng"
+            ],
+            "steps": [
+                "nasi",
+                "goreng"
+            ]
+        },
+        {
+            "title": "nasi bakar",
+            "ingredients": [
+                "nasi",
+                "bakar"
+            ],
+            "steps": [
+                "nasi",
+                "bakar"
+            ]
+        },
+        {
+            "title": "nasi rebus",
+            "ingredients": [
+                "nasi",
+                "rebus"
+            ],
+            "steps": [
+                "nasi",
+                "rebus"
+            ]
+        }
+    ],
+    "admin2": [
+        {
+            "title": "dadar gulung",
+            "ingredients": [
+                "dadar",
+                "gulung"
+            ],
+            "steps": [
+                "dadar",
+                "gulung"
+            ]
+        }
+    ]
+}

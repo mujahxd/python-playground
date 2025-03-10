@@ -2,7 +2,7 @@
 # This is the main file to run the application
 
 from auth import register, login
-from recipes import add_recipe, delete_recipe, delete_all_recipes, view_recipes
+from recipes import add_recipe, delete_recipe, delete_all_recipes, view_guest_recipes, view_user_recipes
 
 def main():
     user = None
@@ -45,7 +45,7 @@ def recipe_menu(user):
         choice = input("Choose an option: ")
         
         if choice == "1":
-            view_recipes()
+            view_guest_recipes() if user == "guest" else view_user_recipes(user)
         elif choice == "2" and user != "guest":
             add_recipe(user)
         elif choice == "3" and user != "guest":

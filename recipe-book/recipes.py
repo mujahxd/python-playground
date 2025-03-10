@@ -30,44 +30,38 @@ def add_recipe(username):
     save_data("recipes.json", recipes)
     print("Recipe added successfully!\n")
 
-
-def view_recipes(username=None):
-    """View all recipes."""
+def view_guest_recipes():
+    """View all recipes for guest users."""
     recipes = load_data("recipes.json")
 
     if not recipes:
-        print("No recipes available.\n")
+        print("No recipes available.")  # Jika tidak ada resep
         return
+
+    print("\nAll Recipes:")
     
-    # for index, recipe in enumerate(recipes, start=1):
-    #     print(f"\nRecipe {index}: {recipe['title']}")
-    #     print("Ingredients:", ", ".join(recipe['ingredients']))
-    #     print("Steps:")
-    #     for step_num, step in enumerate(recipe['steps'], start=1):
-    #         print(f"  {step_num}. {step}")
-    #     print("Author:", recipe['author'])
-    if username:
-        if username not in recipes or not recipes[username]:
-            print("You have no recipes yet.")
-            return
-        print(f"\nRecipes by {username}:")
-        for index, recipe in enumerate(recipes[username], start=1):
-            print(f"\nRecipe {index}: {recipe['title']}")
+    for user, user_recipes in recipes.items():
+        for recipe in user_recipes:
+            print(f"\nRecipe by {user}: {recipe['title']}")
             print("Ingredients:", ", ".join(recipe['ingredients']))
             print("Steps:")
             for step_num, step in enumerate(recipe['steps'], start=1):
                 print(f"  {step_num}. {step}")
-        print("Author:", username)
-    else:
-        print("\nAll Recipes:")
-        for user, user_recipes in recipes.items():
-            for index, recipe in enumerate(user_recipes, start=1):
-                print(f"\nRecipe {index} by {user}: {recipe['title']}")
-                print("Ingredients:", ", ".join(recipe['ingredients']))
-                print("Steps:")
-                for step_num, step in enumerate(recipe['steps'], start=1):
-                    print(f"  {step_num}. {step}")
-            print("Author:", user)
+
+def view_user_recipes(username):
+    """View only the logged-in user's recipes."""
+    recipes = load_data("recipes.json")
+
+    if not recipes or username not in recipes or not recipes[username]:
+        print("You have no recipes yet.")  # Jika pengguna tidak punya resep
+        return
+
+    for index, recipe in enumerate(recipes[username], start=1):
+        print(f"\nRecipe: {recipe['title']}")
+        print("Ingredients:", ", ".join(recipe['ingredients']))
+        print("Steps:")
+        for step_num, step in enumerate(recipe['steps'], start=1):
+            print(f"  {step_num}. {step}")
 
 
 def delete_recipe(username):
