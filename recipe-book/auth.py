@@ -1,6 +1,6 @@
 # auth.py (Authentication Management)
 from storage import load_data, save_data
-import utils
+from utils import hash_password, verify_password
 
 def register():
     """Register a new user with username and password."""
@@ -25,7 +25,7 @@ def register():
     
     hashed_password = hash_password(password)
     users[username] = hashed_password
-    save_data("users.json")
+    save_data("users.json", users)
     print("Registration successful!")
 
 
