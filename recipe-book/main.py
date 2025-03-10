@@ -53,7 +53,7 @@ def recipe_menu(user):
         elif choice == "4" and user != "guest":
             delete_all_recipes(user)
         elif choice == "5":
-            print("Logging out...")
+            print("Logging out...\n")
             break
         else:
             print("Invalid choice. Please try again.\n")
