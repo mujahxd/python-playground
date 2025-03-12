@@ -15,8 +15,10 @@ class ProductView:
             return
         
         print("\n📦 Product List:")
-        for product in products:
-            print(f"{product.id}. {product.name} - Rp{product.price} (Stock: {product.stock})")
+        for index, product in enumerate(products, start=1):  # ✅ UI numbering only
+            print(f"{index}. {product.name} - Rp{product.price} (Stock: {product.stock})")
+        # for product in products:
+        #     print(f"{product.id}. {product.name} - Rp{product.price} (Stock: {product.stock})")
         
     def input_new_product(self):
         """CLI function to add a new product."""
@@ -52,5 +54,36 @@ class ProductView:
         except ValueError:
             print("❌ Input Error: Product ID and stock must be numbers.")
 
-        
+
+    def delete_product(self):
+        """Delete an existing product based on UI numbering."""
+        self.show_all_products()
+        products = self.controller.get_all_products()
+
+        if not products:
+            return
+
+        try:
+            product_index = int(input("\nEnter the product number to delete: ")) - 1
+            if product_index < 0 or product_index >= len(products):
+                print("❌ Invalid product number.")
+                return
+
+            product = products[product_index]  # ✅ Get the actual Product object
+            confirm = input(f"Are you sure you want to delete '{product.name}'? Type 'yes' to confirm: ").strip().lower()
+
+            if confirm != "yes":
+                print("❌ Deletion cancelled.")
+                return
+            
+            success, result = self.controller.delete_product(product.id)
+
+            if success:
+                print(f"✅ Success: Product '{result}' has been deleted!")
+            else:
+                print(f"❌ Error: {result}")
+
+        except ValueError:
+            print("❌ Input Error: Product number must be a valid number.")
+
 

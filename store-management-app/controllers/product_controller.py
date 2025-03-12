@@ -52,3 +52,17 @@ class ProductController:
         except SQLAlchemyError as e:
             self.session.rollback()
             return False, str(e)
+
+    def delete_product(self, product_id):
+        """Delete a product by its ID."""
+        try:
+            product = self.session.query(Product).filter_by(id=product_id).first()
+            if not product:
+                return False, f"Product with ID {product_id} not found."
+            
+            self.session.delete(product)
+            self.session.commit()
+            return True, product.name
+        except SQLAlchemyError as e:
+            self.session.rollback()
+            return False, str(e)
