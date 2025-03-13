@@ -1,4 +1,4 @@
-from views import ProductView
+from views import ProductView, UserView
 from models import init_db
 from controllers import UserController
 
@@ -76,8 +76,21 @@ def admin_menu():
     
 
 def user_menu(username):
-    """User menu (To be implemented later)."""
-    print(f"\n🔹 Welcome, {username}! User features will be added soon.")
+    """User menu interface."""
+    view = UserView(username)
+    while True:
+        print(f"\n===== Welcome, {username}! =====")
+        print("1. Buy Product")
+        print("2. Logout")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            view.buy_product()
+        elif choice == "2":
+            print("🔐 Logging out...")
+            main()
+            break
+        else:
+            print("❌ Invalid choice! Please enter a valid option.")
 
 if __name__ == "__main__":
     main()
