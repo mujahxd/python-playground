@@ -11,4 +11,4 @@ This is a **Store Management System** built with **Python** and **SQLAlchemy**, 
 
 ## 📖 Read the Full Article
 For a detailed breakdown of this project, check out my article on Medium:  
-[👉 Read Here](https://medium.com/@mujahxd/building-a-powerful-store-management-system-with-python-and-sqlalchemy-937c1e50d168) *(Replace with your Medium link)*
+[👉 Read Here](https://medium.com/@mujahxd/building-a-powerful-store-management-system-with-python-and-sqlalchemy-937c1e50d168)
